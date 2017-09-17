@@ -1,0 +1,66 @@
+{% extends 'music/genre.html'%}
+{% block title%}{{album}}{%  endblock %}
+{% block albums_active%}{{active}}{% endblock%}
+{% block body%}
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12 ">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="col-sm-12">
+							<h2>Add New Document</h2>
+						</div>
+						<form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						{%for field in form %}
+							<div class="form-group">
+								<label class="control-label col-sm-2">{{field.label_tag}}</label>
+								<div class="col-sm-10">{{field}}</div>
+				
+							</div>
+						{% endfor %}<div class="col-sm-offset-2">
+							<button type="submit" class="btn btn-success">Add</button></div>
+						</form>
+					</div>
+				<div>
+			</div>
+		</div>
+	</div>
+
+
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12"><h2>All Documents</h2></div>
+			<div class="col-sm-12">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Document</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for doc1 in all_doc %}
+						<tr>
+							<td>{{doc1.document_title}}</td>
+							
+							<td><a target="_blank" href="{{doc1.doc_url}}">
+<button type="button" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-play">&nbsp;show</span></button></a></td>
+							<td><form action="{% url 'music:doc-delete' doc1.id%}" method="post" style="display:inline;">
+									{% csrf_token %}  <!-- prevents cross-site forgery-->
+									<input type="hidden" name="sid" value="{{doc1.id}}">
+									<button type="submit" class="btn btn-danger btn-xs">
+									<span class="glyphicon glyphicon-remove">&nbsp;Delete</span>
+									</button>
+								</form></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+
+				</table>
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}

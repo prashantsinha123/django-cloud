@@ -1,0 +1,38 @@
+{% extends 'music/genre.html'%}
+{% block title%}{{album}}{%  endblock %}
+{% block albums_active%}active{% endblock%}
+{% block body%}
+<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12"><h2>All Songs</h2></div>
+			<div class="col-sm-12">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Artist</th>
+							<th>Song</th>
+							<th>Album</th>
+						</tr>
+					</thead>
+					<tbody>
+					{% for album in all_albums %}<!-- I did it.-->
+						
+						{% for songs in album.song_set.all %}
+							
+							<tr>
+							<td>{{songs.song_title}}</td>
+							<td>{{songs.album.artist}}</td>
+							<td><a target="_blank" href="{{songs.file_type.url}}">
+<button type="button" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-play">&nbsp;play</span></button></a></td>
+							<td>{{songs.album.album_title}}</td>
+							</tr>
+						{% endfor %}
+					{% endfor %}
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}
