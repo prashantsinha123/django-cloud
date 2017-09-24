@@ -22,7 +22,7 @@ Steps to follow:
 5. Migrations will be used just in context of model creations only.
 6. python manage.py runserver
 ```
-#Deploy on ngrok:
+# Deploy on ngrok:
 ```
 1. Download the ngrok zip file.
 2. Open the terminal and unzip it with :-unzip /Downloads/ngrok-stable-linux-amd64.zip
